@@ -1,0 +1,27 @@
+name: "Check if last commit was deployed to pre with success"
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  find-last-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v4
+
+    - name: Get last commit before merge
+      if: github.event.pull_request.merged == true
+      run: |
+        # Get the SHA of the merge commit
+        MERGE_COMMIT_SHA=$(git rev-parse HEAD)
+
+        # Get the SHA of the last commit on the branch before the merge
+        LAST_COMMIT_BEFORE_MERGE=$(git log -n 1 $MERGE_COMMIT_SHA^2 --format="%H")
+
+        echo "Last commit before merge was $LAST_COMMIT_BEFORE_MERGE"
+
+        # You can also set this as an output if needed
+        echo "::set-output name=last_commit_before_merge::$LAST_COMMIT_BEFORE_MERGE"
