@@ -2,7 +2,7 @@ name: "Check if last commit was deployed to pre with success"
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened, closed]
 
 jobs:
   find-last-commit:
