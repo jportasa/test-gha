@@ -17,5 +17,5 @@ jobs:
       run: |
         echo "Merge commit: ${{ github.event.pull_request.merge_commit_sha }}
         MERGE_COMMIT=${{ github.event.pull_request.merge_commit_sha }}
-        LAST_COMMIT_BEFORE_MERGE=$(git log -n 1 $MERGE_COMMIT^2 --format="%H")
+        LAST_COMMIT_BEFORE_MERGE=$(git log -n 1 ${MERGE_COMMIT}^2 --format="%H")
         echo "Last branch commit: $LAST_COMMIT_BEFORE_MERGE"
