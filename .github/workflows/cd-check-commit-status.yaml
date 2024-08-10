@@ -13,6 +13,6 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Get last commit before merge
-      if: github.event.pull_request.merged == true github.event.pull_request.merge_commit_sha
+      if: github.event.pull_request.merged == true
       run: |
         echo ${{ github.event.pull_request.merge_commit_sha }}
