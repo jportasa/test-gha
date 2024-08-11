@@ -21,4 +21,4 @@ jobs:
     - name: Get last commit before merge
       if: github.event.pull_request.merged == true
       run: |
-        echo "Last branch commit: ${{ github.event.pull_request.head.repo.sha }}"
+        echo "Last branch commit: ${{ github.event.pull_request.head.sha }}"
