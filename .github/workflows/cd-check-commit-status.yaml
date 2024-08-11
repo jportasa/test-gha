@@ -2,7 +2,7 @@ name: "Check if last commit was deployed to pre with success"
 
 on:
   pull_request:
-    types: [closed]
+    types: [opened, synchronize, reopened, closed]
 
 jobs:
   find-last-commit:
@@ -17,6 +17,9 @@ jobs:
         GITHUB_CONTEXT: ${{ toJson(github) }}
       run: echo "$GITHUB_CONTEXT"
 
+    - name: check current commit
+      if: github.event.pull_request.merged == false
+      run: echo " last commit in the branch is:"
 
     - name: Get last commit before merge
       if: github.event.pull_request.merged == true
