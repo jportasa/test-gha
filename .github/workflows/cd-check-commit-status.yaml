@@ -17,10 +17,8 @@ jobs:
         GITHUB_CONTEXT: ${{ toJson(github) }}
       run: echo "$GITHUB_CONTEXT"
 
+
     - name: Get last commit before merge
       if: github.event.pull_request.merged == true
       run: |
-        echo "Merge commit: ${{ github.event.pull_request.merge_commit_sha }}"
-        MERGE_COMMIT=${{ github.event.pull_request.merge_commit_sha }}
-        LAST_COMMIT_BEFORE_MERGE=$(git log -n 1 ${MERGE_COMMIT}^ --format="%H")
-        echo $LAST_COMMIT_BEFORE_MERGE
+        echo "Last branch commit: ${{ github.event.pull_request.base.sha }}"
