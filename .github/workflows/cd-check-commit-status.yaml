@@ -9,8 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout the code
-      uses: actions/checkout@v4
 
     - name: Dump GitHub context
       env:
@@ -19,7 +17,8 @@ jobs:
 
     - name: check current commit
       if: github.event.pull_request.merged == false
-      run: echo " last commit in the branch is:"
+      run: |
+        echo "last commit in the branch is: ${{ github.event.pull_request.head.sha }}"
 
     - name: Get last commit before merge
       if: github.event.pull_request.merged == true
